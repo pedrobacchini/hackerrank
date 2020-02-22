@@ -1,6 +1,7 @@
 package com.github.pedrobacchini;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
@@ -8,14 +9,12 @@ public class Solution {
 
     // Complete the compareTriplets function below.
     static List<Integer> compareTriplets(List<Integer> a, List<Integer> b) {
-        List<Integer> result = Arrays.asList(0, 0);
+        int pointsAlice = 0, pointsBob = 0, temp;
         for (int i = 0; i < a.size(); i++) {
-            if(a.get(i)>b.get(i))
-                result.set(0, result.get(0)+1);
-            else if(a.get(i)<b.get(i))
-                result.set(1, result.get(1)+1);
+            if(!a.get(i).equals(b.get(i)))
+                temp = (a.get(i) > b.get(i)) ? pointsAlice++ : pointsBob++;
         }
-        return result;
+        return Arrays.asList(pointsAlice, pointsBob);
     }
 
     public static void main(String[] args) {
