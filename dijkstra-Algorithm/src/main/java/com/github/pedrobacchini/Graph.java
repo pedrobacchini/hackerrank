@@ -17,7 +17,6 @@ public class Graph {
         this.edges = edges;
 
         int noOfNodes = calculateNoOfNode(edges);
-        System.out.println("num of nodes: " + noOfNodes);
 
         nodes = new Node[noOfNodes];
         for (int i = 0; i < noOfNodes; i++) {
@@ -33,22 +32,52 @@ public class Graph {
     //Dijkstra Algorithm
     public void calculateShortestDistance() {
         //node 0 as source
-        this.nodes[0].setDistanceFromSource(0);
-        int nextNode = 0;
+        Node currentNode = nodes[0];
+        currentNode.setDistanceFromSource(0);
 
-//        for (int indexNode = 0; indexNode < nodes.length; indexNode++) {
-            int indexNode = 0;
-            Node node = nodes[indexNode];
-            ArrayList<Edge> edges = node.getEdges();
+        for (int indexNode = 0; indexNode < nodes.length; indexNode++) {
+            ArrayList<Edge> edges = currentNode.getEdges();
             for (Edge edge : edges) {
                 int neighbourIndex = edge.getNeighbourIndex(indexNode);
                 if (!this.nodes[neighbourIndex].isVisited()) {
-                    int tentative = this.nodes[nextNode].getDistanceFromSource() + edge.getLength();
-                    System.out.println(neighbourIndex);
-                    System.out.println(tentative);
+                    int tentative = currentNode.getDistanceFromSource() + edge.getLength();
+                    if (tentative < nodes[neighbourIndex].getDistanceFromSource()) {
+                        nodes[neighbourIndex].setDistanceFromSource(tentative);
+                    }
                 }
             }
-//        }
+            //all neighbours checked so node visited
+            currentNode.visit();
+
+            //next node must be with shortest distance
+            currentNode = getNodeShortestDistance(nodes);
+        }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Number of node = ").append(nodes.length);
+        sb.append("\nNumber of edges = ").append(edges.length);
+        for (int i = 0; i < nodes.length; i++) {
+            sb.append("\nThe Shortest distance from node 0 to node ")
+                    .append(i)
+                    .append(" is ")
+                    .append(nodes[i].getDistanceFromSource());
+        }
+        return sb.toString();
+    }
+
+    private Node getNodeShortestDistance(Node[] nodes) {
+        Node shortestNode = nodes[0];
+        int shortestDist = Integer.MAX_VALUE;
+        for (Node node : nodes) {
+            if (!node.isVisited() && node.getDistanceFromSource() < shortestDist) {
+                shortestDist = node.getDistanceFromSource();
+                shortestNode = node;
+            }
+        }
+        return shortestNode;
     }
 
     private int calculateNoOfNode(Edge[] edges) {

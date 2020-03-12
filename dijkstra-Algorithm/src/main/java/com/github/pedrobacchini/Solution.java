@@ -7,7 +7,7 @@ public class Solution {
         Edge[] edges = new Edge[]{
                 new Edge(0, 1, 4),
                 new Edge(0, 2, 3),
-                new Edge(0, 3, 4),
+                new Edge(0, 3, 7),
                 new Edge(1, 2, 6),
                 new Edge(1, 4, 5),
                 new Edge(2, 4, 11),
@@ -22,6 +22,8 @@ public class Solution {
         Graph graph = new Graph(edges);
 
         graph.calculateShortestDistance();
+
+        System.out.println(graph.toString());
 
     }
 }
