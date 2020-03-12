@@ -21,7 +21,7 @@ public class Solution {
 
         Graph graph = new Graph(edges);
 
-        System.out.println(graph.toString());
+        graph.calculateShortestDistance();
 
     }
 }

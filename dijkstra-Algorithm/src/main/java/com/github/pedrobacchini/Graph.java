@@ -2,6 +2,8 @@ package com.github.pedrobacchini;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+
 /**
  * Model a graph
  */
@@ -26,6 +28,27 @@ public class Graph {
             this.nodes[edge.getFromNodeIndex()].addEdge(edge);
             this.nodes[edge.getToNodeIndex()].addEdge(edge);
         }
+    }
+
+    //Dijkstra Algorithm
+    public void calculateShortestDistance() {
+        //node 0 as source
+        this.nodes[0].setDistanceFromSource(0);
+        int nextNode = 0;
+
+//        for (int indexNode = 0; indexNode < nodes.length; indexNode++) {
+            int indexNode = 0;
+            Node node = nodes[indexNode];
+            ArrayList<Edge> edges = node.getEdges();
+            for (Edge edge : edges) {
+                int neighbourIndex = edge.getNeighbourIndex(indexNode);
+                if (!this.nodes[neighbourIndex].isVisited()) {
+                    int tentative = this.nodes[nextNode].getDistanceFromSource() + edge.getLength();
+                    System.out.println(neighbourIndex);
+                    System.out.println(tentative);
+                }
+            }
+//        }
     }
 
     private int calculateNoOfNode(Edge[] edges) {
