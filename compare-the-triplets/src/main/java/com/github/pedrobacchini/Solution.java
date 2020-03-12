@@ -5,6 +5,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
+/**
+ * https://www.hackerrank.com/challenges/compare-the-triplets/problem
+ */
 public class Solution {
 
     // Complete the compareTriplets function below.

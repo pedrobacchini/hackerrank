@@ -2,6 +2,9 @@ package com.github.pedrobacchini;
 
 import java.util.Scanner;
 
+/**
+ * https://www.hackerrank.com/challenges/mini-max-sum/problem
+ */
 public class Solution {
 
     // Complete the miniMaxSum function below.
